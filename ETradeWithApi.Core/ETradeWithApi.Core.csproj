@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ETradeWithApi.Dal\ETradeWithApi.Dal.csproj" />
+    <ProjectReference Include="..\ETradeWithApi.Entity\ETradeWithApi.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

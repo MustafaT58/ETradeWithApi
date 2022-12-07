@@ -1,4 +1,8 @@
 using ETradeWithApi.Dal;
+using ETradeWithApi.Entity.Concretes;
+using ETradeWithApi.Repos.Abstracts;
+using ETradeWithApi.Repos.Concretes;
+using ETradeWithApi.Uow;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +17,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TradeContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
+builder.Services.AddScoped<IBasketDetailRep, BasketDetailRep<BasketDetail>>();
+builder.Services.AddScoped<IProductsRep, ProductsRep<Products>>();
+builder.Services.AddScoped<IUsersRep, UsersRep<Users>>();
+builder.Services.AddScoped<IUow, Uow>();
+
 
 builder.Services.AddCors(options =>
 {

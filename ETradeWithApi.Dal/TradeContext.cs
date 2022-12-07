@@ -14,6 +14,12 @@ namespace ETradeWithApi.Dal
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BasketDetail>()
+                .HasKey(b => new { b.Id, b.ProductId });
+            // https://www.learnentityframeworkcore.com/configuration/fluent-api/haskey-method
+        }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<County> Counties { get; set; }
