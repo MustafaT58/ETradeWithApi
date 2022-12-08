@@ -1,4 +1,4 @@
-﻿using ETradeWithApi.Models;
+
 using ETradeWithApi.Uow;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +13,11 @@ namespace ETradeWithApi.Controllers
     public class AuthController : ControllerBase
     {
         IUow _uow;
-        UsersModel _model;
         ApiResponse _apiResponse;
 
-        public AuthController(IUow uow, UsersModel model, ApiResponse apiResponse)
+        public AuthController(IUow uow, ApiResponse apiResponse)
         {
             _uow = uow;
-            _model = model;
             _apiResponse = apiResponse;
         }
            
@@ -32,7 +30,7 @@ namespace ETradeWithApi.Controllers
            var newUser  = _uow._usersRep.CreateUser(user);
             if (newUser.Error == true)
             {
-               _apiResponse.Error = true;
+                _apiResponse.Error = true;
                 _apiResponse.Msg = $"{newUser.EntityName} mevcut";
                  
             }
@@ -49,32 +47,30 @@ namespace ETradeWithApi.Controllers
 
         }
 
-        //[HttpGet]
-        //public IActionResult Login()
-        //{
-        //    return Ok();
-        //}
-        //[HttpPost]
-        //public IActionResult Login(string Mail,string Password)
-        //{
-        //    var user = _uow._usersRep.Login(Mail, Password);    
-        //    if (user.Error == false)
-        //    {
-        //        HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
-        //        return Ok(user);
-        //    }
-        //}
 
-
-
+        [HttpPost]
+        public ApiResponse Login(string Mail, string Password)
+        {
+            var user = _uow._usersRep.Login(Mail, Password);
+            if (user.Error == false)
+            {
+                //HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
+                _apiResponse.Error = false;
+                _apiResponse.Msg = $"{Mail} ile giriş yapıldı";
+                
+            }
+            else
+            {
+                _apiResponse.Error = true;
+                _apiResponse.Msg = "Kullanıcı adı veya şifre hatalı";
+            }
+            return _apiResponse;
+        }
 
         [HttpGet]
         public List<Users> GetUsers()
         {
             return _uow._usersRep.List();
         }
-
-
-
     }
 }

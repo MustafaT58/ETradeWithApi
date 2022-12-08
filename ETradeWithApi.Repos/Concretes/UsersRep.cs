@@ -24,7 +24,8 @@ namespace ETradeWithApi.Repos.Concretes
             Users selectedUser = _db.Set<Users>().FirstOrDefault(x => x.Mail == u.Mail);
             if (selectedUser == null)
             {
-                u.Password = BCrypt.Net.BCrypt.HashPassword(u.Password);
+                int salt = 12;
+                u.Password = BCrypt.Net.BCrypt.HashPassword(u.Password, salt);
                 u.Error = false;
             }
             else

@@ -30,8 +30,8 @@ builder.Services.AddScoped<IUnitRep, UnitRep<Unit>>();
 builder.Services.AddScoped<IUsersRep, UsersRep<Users>>();
 builder.Services.AddScoped<IVatRep, VatRep<Vat>>();
 builder.Services.AddScoped<IUow, Uow>();
-builder.Services.AddScoped<UsersModel>();
 builder.Services.AddScoped<ApiResponse>();
+//builder.Services.AddScoped<BasketDetail>();
 
 
 builder.Services.AddCors(options =>
