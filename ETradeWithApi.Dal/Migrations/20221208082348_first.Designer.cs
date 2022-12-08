@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETradeWithApi.Dal.Migrations
 {
     [DbContext(typeof(TradeContext))]
-    [Migration("20221207124327_first")]
+    [Migration("20221208082348_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

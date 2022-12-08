@@ -1,10 +1,12 @@
 using ETradeWithApi.Dal;
 using ETradeWithApi.Entity.Concretes;
+using ETradeWithApi.Http;
 using ETradeWithApi.Models;
 using ETradeWithApi.Repos.Abstracts;
 using ETradeWithApi.Repos.Concretes;
 using ETradeWithApi.Uow;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,8 @@ builder.Services.AddScoped<IUsersRep, UsersRep<Users>>();
 builder.Services.AddScoped<IVatRep, VatRep<Vat>>();
 builder.Services.AddScoped<IUow, Uow>();
 builder.Services.AddScoped<UsersModel>();
+builder.Services.AddScoped<ApiResponse>();
+
 
 builder.Services.AddCors(options =>
 {
