@@ -8,6 +8,6 @@ namespace ETradeWithApi.Entity.Concretes
 {
     public class Categories : BaseDescription
     {
-        public ICollection<Products> Products { get; set; }
+        public ICollection<Products> ?Products { get; set; }
     }
 }
