@@ -8,6 +8,6 @@ namespace ETradeWithApi.Entity.Concretes
 {
     public class City : BaseDescription
     {
-        public ICollection<County> Counties { get; set; }
+        public ICollection<County> ?Counties { get; set; }
     }
 }

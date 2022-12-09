@@ -16,13 +16,13 @@ namespace ETradeWithApi.Entity.Concretes
 
         public int UnitId { get; set; }
         [ForeignKey("CategoryId")]
-        public Categories Categories { get; set; }
+        public Categories ?Categories { get; set; }
 
         [ForeignKey("VatId")]
-        public Vat Vat { get; set; }
+        public Vat ?Vat { get; set; }
 
         [ForeignKey("UnitId")]
-        public Unit Unit { get; set; }
-        public ICollection<BasketDetail> BasketDetails { get; set; }
+        public Unit ?Unit { get; set; }
+        public ICollection<BasketDetail> ?BasketDetails { get; set; }
     }
 }

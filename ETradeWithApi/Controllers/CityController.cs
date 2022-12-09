@@ -43,5 +43,41 @@ namespace ETradeWithApi.Controllers
 
             return _apiResponse;
         }
+
+        [HttpPut]
+        public ApiResponse Update(City city)
+        {
+            try
+            {
+                _uow._cityRep.Update(city);
+                _uow.Commit();
+                _apiResponse.Error = false;
+                _apiResponse.Msg = "Şehir Güncellendi";
+            }
+            catch (Exception)
+            {
+                _apiResponse.Error = true;
+                _apiResponse.Msg = "Şehir Güncelleme Başarısız";
+            }
+
+            return _apiResponse;
+        }
+        [HttpDelete] 
+        public ApiResponse Delete(City city)
+        {
+            try
+            {
+                _uow._cityRep.Delete(city.Id);
+                _uow.Commit();
+                _apiResponse.Error = false;
+                _apiResponse.Msg = "Şehir Silindi";
+            }
+            catch (Exception)
+            {
+                _apiResponse.Error = true;
+                _apiResponse.Msg = "Şehir Silme İşlemi Başarısız";            
+            }
+            return _apiResponse;
+        }
     }
 }
