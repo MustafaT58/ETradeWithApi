@@ -16,7 +16,7 @@ export default function ProductList() {
     },[])
   return (
     <>
-    <h1>{apiString}</h1>
+    <h1>{apiString} x</h1>
     </>
   )
 }
