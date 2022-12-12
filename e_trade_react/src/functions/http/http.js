@@ -4,6 +4,7 @@ const url = "https://localhost:7134/"
 
 export async function getProducts() {
     const response = await axios.get(url + "Products/List")
+    // const response2 = await axios.get(url + "Categories/List")
     const productData = []
     try {
 
@@ -15,6 +16,7 @@ export async function getProducts() {
                 unitprice: response.data[key].unitPrice,
             }
             productData.push(productObj)
+            
         }
     } catch (error) {
         console.log(error)
@@ -26,4 +28,12 @@ export async function addProduct(product) {
     const response = await axios.post(url + "Products/Create", product);
     const name = response.data.description;
     return name;
+}
+
+export function getProduct(id){
+    return axios.get(url+`Products/List/${id}`)
+}
+
+export function updateSelectedProduct(product){
+    return axios.put(url+`Products/Update`,product)
 }

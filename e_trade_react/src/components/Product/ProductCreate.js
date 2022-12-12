@@ -1,8 +1,10 @@
 import React,{useState,useEffect} from 'react'
-import { addProduct, getProducts } from '../functions/http/http'
+import { useNavigate } from 'react-router-dom'
+import { addProduct, getProducts } from '../../functions/http/http'
 
-export default function ProductList() {
+export default function ProductCreate() {
     const [apiString, setApiString]= useState("")
+    const navigate = useNavigate()
 
     useEffect(()=>{
         async function getAllProducts(){
@@ -10,6 +12,7 @@ export default function ProductList() {
             setApiString(product[0].productname)
         }
         getAllProducts()
+        
     },[])
 
     const [newProduct,setNewProduct]=useState({
@@ -24,8 +27,10 @@ export default function ProductList() {
     const createProduct = ()=> {
         addProduct(newProduct)
         .then((res)=>{
-            alert ("Yeni ürün eklendi!")
-            console.log(newProduct)
+            if (res) {
+                alert ("Yeni ürün eklendi!")
+            }
+            navigate("/products/list")
         })
     }
     const onChange = (event)=> {
@@ -52,7 +57,7 @@ export default function ProductList() {
              <label>Birim</label>
             <input className="form-control"type="text" value={newProduct.unitid} name="unitid" onChange={onChange}
             />
-            <input className="btn btn-success" type="submit" value="Update" onChange={onChange} onClick={() => createProduct()}
+            <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" value="Ürün Ekle" onChange={onChange} onClick={() => createProduct()}
             />
           </div>
         </div>
