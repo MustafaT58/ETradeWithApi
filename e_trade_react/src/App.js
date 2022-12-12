@@ -1,10 +1,12 @@
 import ProductList from "./components/ProductList";
+import Registration from "./components/Registration";
+
 
 function App() {
   return (
-    <>
-    <ProductList/>
-    </>
+    <div>
+      <ProductList/>
+    </div>
   );
 }
 
