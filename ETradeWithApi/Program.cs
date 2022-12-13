@@ -20,6 +20,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TradeContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
+
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddScoped<IBasketDetailRep, BasketDetailRep<BasketDetail>>();
 builder.Services.AddScoped<IBasketMasterRep, BasketMasterRep<BasketMaster>>();
 builder.Services.AddScoped<ICategoriesRep, CategoriesRep<Categories>>();
@@ -44,6 +47,7 @@ builder.Services.AddCors(options =>
                           policy.AllowAnyMethod();
                       });
 });
+
 
 var app = builder.Build();
 

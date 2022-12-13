@@ -1,5 +1,5 @@
-import React,{useState,useEffect, useContext} from 'react'
-import { getProducts } from '../../functions/http/http'
+import React, {useEffect, useContext} from 'react'
+import { deleteProduct, getProducts } from '../../functions/http/http'
 import {useNavigate} from 'react-router-dom'
 import { ProductContext } from '../../context/Context'
 
@@ -37,33 +37,32 @@ export default function ProductList() {
             <tbody>
                 {context.products.map(b => {
                     return ( 
-                        <tr>
+                        <tr key={b.id}>
                             <td>{b.productname}</td>
                             <td>{b.description}</td>
                             <td>{b.unitprice}</td>
                             {/* <td>{b.categoryid}</td>
                             <td>{b.unitid}</td>
                             <td>{b.vatid}</td> */}
-                            
-
-                            {/* <td>
-                               <button
-                            className='btn btn-success'
-                            onClick={()=>
-                            navigate("/book/update" +b.id,{
-                                state: {id: b.id}
-                            })}
-                           >Update</button> 
-                            </td> */}
+                    
                             <td>
                                 <button 
                                 className='btn btn-success' 
                                 onClick={() => 
-                                    navigate("/products/update/", {
+                                    navigate("/products/update", {
                                         state: {id : b.id},
-                                    })}> Update Product </button>
+                                    })}> Ürün Güncelle </button>
                             </td>
-                            
+                            <td>
+                                <button 
+                                className='btn btn-danger' 
+                                onClick={() => deleteProduct(b.id)
+                                .then(() => {
+                                    alert("Ürün silindi.")
+                                    navigate("/")
+                                })}
+                                > Ürün Sil </button>
+                            </td>
                         </tr>                     
                     )
 

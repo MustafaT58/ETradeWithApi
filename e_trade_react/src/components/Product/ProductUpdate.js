@@ -8,12 +8,12 @@ export default function ProductUpdate() {
     const navigate=useNavigate();
     const location=useLocation();
     const[selectedProduct,setSelectedProduct]=useState({
-        productname:"",
+        productName:"",
         description:"",
-        unitprice:"",
-        categoryid:"",
-        vatid:"",
-        unitid:"",
+        unitPrice:"",
+        // categoryid:"",
+        // vatid:"",
+        // unitid:"",
     })
     useEffect(()=>{
         getProduct(location.state.id).then((res)=>{
@@ -35,15 +35,15 @@ export default function ProductUpdate() {
     <div className="row">
     <div className="col-md-5">
       <label>Ürün Adı</label>
-      <input className="form-control" type="text" value={selectedProduct.productname} name="productname"onChange={onChange}
+      <input className="form-control" type="text" value={selectedProduct.productName} name="productName"onChange={onChange}
       />
       <label>Fiyat</label>
-      <input className="form-control" type="text"value={selectedProduct.unitprice} name="unitprice"onChange={onChange}
+      <input className="form-control" type="text"value={selectedProduct.unitPrice} name="unitPrice"onChange={onChange}
       />
       <label>Açıklama</label>
       <input className="form-control"type="text" value={selectedProduct.description} name="description" onChange={onChange}
       />
-       <label>Kategori</label>
+       {/* <label>Kategori</label>
       <input className="form-control"type="text" value={selectedProduct.categoryid} name="categoryid" onChange={onChange}
       />
        <label>Vergi</label>
@@ -51,8 +51,8 @@ export default function ProductUpdate() {
       />
        <label>Birim</label>
       <input className="form-control"type="text" value={selectedProduct.unitid} name="unitid" onChange={onChange}
-      />
-      <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" value="Ürün Ekle" onChange={onChange} onClick={() => updateProduct()}
+      /> */}
+      <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" value="Ürün Güncelle" onChange={onChange} onClick={() => updateProduct()}
       />
     </div>
   </div>

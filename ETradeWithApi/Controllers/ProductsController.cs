@@ -1,4 +1,5 @@
-﻿using ETradeWithApi.Dal;
+﻿using AutoMapper;
+using ETradeWithApi.Dal;
 using ETradeWithApi.Entity.Concretes;
 using ETradeWithApi.Http;
 using ETradeWithApi.Uow;
@@ -13,13 +14,13 @@ namespace ETradeWithApi.Controllers
     {
         IUow _uow;
         ApiResponse _apiResponse;
-        TradeContext _db;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IUow uow, ApiResponse apiResponse, TradeContext db)
+        public ProductsController(IUow uow, ApiResponse apiResponse, IMapper mapper)
         {
             _uow = uow;
             _apiResponse = apiResponse;
-            _db = db;
+            _mapper = mapper;
         }
         [HttpGet]
         public List<Products> List()
@@ -44,11 +45,20 @@ namespace ETradeWithApi.Controllers
             return _apiResponse;
         }
         [HttpPut]
-        public ApiResponse Update(Products product)
+        public ApiResponse Update([FromBody] Products product)
         {
             try
             {
-                Products selectedProduct = _db.Set<Products>().FirstOrDefault(x => x.Id == product.Id);
+                Products selectedProduct = _uow._productsRep.Find(product.Id);
+                selectedProduct.ProductName = product.ProductName;
+                selectedProduct.BasketDetails = product.BasketDetails;
+                selectedProduct.UnitPrice = product.UnitPrice;
+                selectedProduct.Unit = product.Unit;
+                selectedProduct.Categories = product.Categories;
+                selectedProduct.Vat = product.Vat;
+                selectedProduct.Description = product.Description;
+                selectedProduct.CategoryId = product.CategoryId;
+                //var x = _mapper.Map<Products>(selectedProduct);
                 if (selectedProduct != null)
                 {
                     _uow._productsRep.Update(product);
@@ -70,21 +80,22 @@ namespace ETradeWithApi.Controllers
             }
             return _apiResponse;
         }
-        [HttpDelete]
-        public ApiResponse Delete(Products product)
+        [HttpDelete("{id:int}")]
+        public ApiResponse Delete(int Id)
         {
             try
             {
-                Products selectedProduct = _db.Set<Products>().FirstOrDefault(x => x.Id == product.Id);
+                Products selectedProduct = _uow._productsRep.Find(Id);
                 if (selectedProduct != null)
                 {
-                    _uow._productsRep.Delete(product.Id);
+                    _uow._productsRep.Delete(Id);
                     _uow.Commit();
                     _apiResponse.Error = false;
                     _apiResponse.Msg = "Ürün Silme Başarılı";
                 }
                 else
                 {
+                    _apiResponse.Error = true;
                     _apiResponse.Msg = "Ürün Bulunamadı";
                 }
 
@@ -95,6 +106,13 @@ namespace ETradeWithApi.Controllers
                 _apiResponse.Msg = "Ürün Silme Başarısız";
             }
             return _apiResponse;
+        }
+
+        [HttpGet("{id:int}")]
+        public Products GetById(int Id)
+        {
+            var product = List().Where(x => x.Id == Id).FirstOrDefault();
+            return product;
         }
     }
 }

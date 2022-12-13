@@ -24,16 +24,20 @@ export async function getProducts() {
     return productData
 }
 
-export async function addProduct(product) {
-    const response = await axios.post(url + "Products/Create", product);
+export async function addProduct(products) {
+    const response = await axios.post(url + "Products/Create", products);
     const name = response.data.description;
     return name;
 }
 
 export function getProduct(id){
-    return axios.get(url+`Products/List/${id}`)
+    return axios.get(url+`Products/GetById/${id}`)
 }
 
-export function updateSelectedProduct(product){
+export function updateSelectedProduct( product){
     return axios.put(url+`Products/Update`,product)
+}
+
+export function deleteProduct(id) {
+    return axios.delete(url + `Products/Delete/${id}`)
 }
