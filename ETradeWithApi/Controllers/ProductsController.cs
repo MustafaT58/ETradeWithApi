@@ -111,8 +111,7 @@ namespace ETradeWithApi.Controllers
         [HttpGet("{id:int}")]
         public Products GetById(int Id)
         {
-            var product = List().Where(x => x.Id == Id).FirstOrDefault();
-            return product;
+            return List().Where(x => x.Id == Id).FirstOrDefault();
         }
     }
 }

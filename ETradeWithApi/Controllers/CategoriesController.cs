@@ -21,7 +21,7 @@ namespace ETradeWithApi.Controllers
         }
 
         [HttpGet]
-        public List<Categories> List()        
+        public List<Categories> List()
         {
             return _uow._categoriesRep.List();
         }
@@ -42,7 +42,7 @@ namespace ETradeWithApi.Controllers
                 _apiResponse.Error = true;
                 _apiResponse.Msg = "Kategori ekleme hatası";
             }
-            
+
             return _apiResponse;
         }
 
@@ -51,11 +51,20 @@ namespace ETradeWithApi.Controllers
         {
             try
             {
-                _uow._categoriesRep.Update(category);
-                _uow.Commit();
+                Categories selectedCategory = _uow._categoriesRep.Find(category.Id);
+                selectedCategory.Description = category.Description;
+                if (selectedCategory != null)
+                {
+                    _uow._categoriesRep.Update(category);
+                    _uow.Commit();
+                    _apiResponse.Error = false;
+                    _apiResponse.Msg = "Güncellendi";
+                }
+                else
+                {
+                    _apiResponse.Msg = "Ürün Bulunamadı.";
+                }
 
-                _apiResponse.Error = false;
-                _apiResponse.Msg = "Güncellendi";
             }
             catch (Exception)
             {
@@ -72,11 +81,19 @@ namespace ETradeWithApi.Controllers
         {
             try
             {
-                _uow._categoriesRep.Delete(category.Id);
-                _uow.Commit();
-
-                _apiResponse.Error = false;
-                _apiResponse.Msg = "silindi";
+                Categories selectedCategory = _uow._categoriesRep.Find(category.Id);
+                if (selectedCategory!=null )
+                {
+                    _uow._categoriesRep.Delete(category.Id);
+                    _uow.Commit();
+                    _apiResponse.Error = false;
+                    _apiResponse.Msg = "silindi";
+                }
+                else
+                {
+                    _apiResponse.Error = true;
+                    _apiResponse.Msg = "Category Bulunamadı";
+                }
             }
             catch (Exception)
             {
@@ -86,6 +103,11 @@ namespace ETradeWithApi.Controllers
 
             return _apiResponse;
 
+        }
+        [HttpGet("{id:int}")]
+        public Categories GetById(int Id)
+        {
+            return List().Where(x => x.Id == Id).FirstOrDefault();
         }
     }
 }

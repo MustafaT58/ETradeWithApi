@@ -3,17 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { addProduct, getProducts } from '../../functions/http/http'
 
 export default function ProductCreate() {
-    const [apiString, setApiString]= useState("")
     const navigate = useNavigate()
-
-    useEffect(()=>{
-        async function getAllProducts(){
-            const product = await getProducts()
-            setApiString(product[0].productname)
-        }
-        getAllProducts()
-        
-    },[])
+    
 
     const [newProduct,setNewProduct]=useState({
         productname:"",

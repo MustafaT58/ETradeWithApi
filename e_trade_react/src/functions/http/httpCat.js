@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const url="https://localhost:7134/"
+
 export async function getCategories(){
     const response=await axios.get(url+"Categories/List")
     const categoryData=[]
@@ -9,7 +10,6 @@ export async function getCategories(){
             const categoryObj={
                 id: response.data[key].id,
                 description: response.data[key].description,
-                products: response.data[key].products,
             }
             categoryData.push(categoryObj)
         }

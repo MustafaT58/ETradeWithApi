@@ -1,20 +1,20 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import { deleteProduct, getProducts } from '../../functions/http/http'
 import {useNavigate} from 'react-router-dom'
-import { ProductContext } from '../../context/Context'
+import { ProductContext } from '../../context/ProContext'
 
 export default function ProductList() {
+    const [deleted, setDeleted] = useState(false)
     const  navigate = useNavigate()
     const context = useContext(ProductContext)
-
+    // const date = Date();
     useEffect(()=>{
         async function getAllProducts(){
             const products = await getProducts()
             context.setProduct(products)
-            console.log(products)
         }
         getAllProducts()
-    },[])
+    },[deleted])
 
   return (
     <div  className='row'>
@@ -22,6 +22,7 @@ export default function ProductList() {
             <button className='btn btn-primary'
             onClick={()=> navigate("/products/create")}
             >Yeni Ürün</button>
+            {/* <p>{date}</p> */}
         <table className='table'>
             <thead>
                 <tr>
@@ -59,7 +60,8 @@ export default function ProductList() {
                                 onClick={() => deleteProduct(b.id)
                                 .then(() => {
                                     alert("Ürün silindi.")
-                                    navigate("/")
+                               setDeleted(true)
+                                  // window.location.reload()
                                 })}
                                 > Ürün Sil </button>
                             </td>
