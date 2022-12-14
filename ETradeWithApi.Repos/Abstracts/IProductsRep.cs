@@ -13,5 +13,6 @@ namespace ETradeWithApi.Repos.Abstracts
     {
         List<ProductsDTO> GetProductsSelect();
         Products FindWithVat(int Id);
+
     }
 }

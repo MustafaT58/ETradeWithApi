@@ -12,7 +12,6 @@ export default function CategoriesList() {
     async function getAllCategories() {
       const categories = await getCategories()
       context.setCategory(categories)
-
     }
     getAllCategories()
   }, [])

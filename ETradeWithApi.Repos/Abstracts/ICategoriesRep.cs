@@ -1,4 +1,5 @@
 ﻿using ETradeWithApi.Core;
+using ETradeWithApi.Dto;
 using ETradeWithApi.Entity.Concretes;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,7 @@ namespace ETradeWithApi.Repos.Abstracts
 {
     public interface ICategoriesRep : IBaseRepository<Categories>
     {
+        ICollection<CategoriesDTO> GetCategoriesDTO();
+
     }
 }

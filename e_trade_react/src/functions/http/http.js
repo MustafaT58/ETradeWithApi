@@ -41,3 +41,8 @@ export function updateSelectedProduct( product){
 export function deleteProduct(id) {
     return axios.delete(url + `Products/Delete/${id}`)
 }
+
+export async function getCategoryName() {
+    const response = await axios.get(url+"Categories/GetCategoryName")
+    console.log(response.data)
+}

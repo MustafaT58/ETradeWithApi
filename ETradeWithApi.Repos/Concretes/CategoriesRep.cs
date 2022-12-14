@@ -1,9 +1,11 @@
 ﻿using ETradeWithApi.Core;
 using ETradeWithApi.Dal;
+using ETradeWithApi.Dto;
 using ETradeWithApi.Entity.Concretes;
 using ETradeWithApi.Repos.Abstracts;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,11 @@ namespace ETradeWithApi.Repos.Concretes
     {
         public CategoriesRep(TradeContext db) : base(db)
         {
+        }
+
+        public ICollection<CategoriesDTO> GetCategoriesDTO()
+        {
+            return Set().Select(x => new CategoriesDTO { Id = x.Id, Description = x.Description }).ToList();
         }
     }
 }

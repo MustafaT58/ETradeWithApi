@@ -24,3 +24,5 @@ export async function addCategory(category){
     const name=response.data.description;
     return name;
 }
+
+

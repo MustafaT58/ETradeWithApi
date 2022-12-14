@@ -82,7 +82,7 @@ namespace ETradeWithApi.Controllers
             try
             {
                 Categories selectedCategory = _uow._categoriesRep.Find(category.Id);
-                if (selectedCategory!=null )
+                if (selectedCategory != null)
                 {
                     _uow._categoriesRep.Delete(category.Id);
                     _uow.Commit();
@@ -109,5 +109,30 @@ namespace ETradeWithApi.Controllers
         {
             return List().Where(x => x.Id == Id).FirstOrDefault();
         }
+
+        /*
+        public ApiResponse GetCategoryName()
+        {
+            try
+            {
+                _uow._categoriesRep.GetCategoriesDTO();
+                _apiResponse.Error = false;
+                _apiResponse.Msg = "Category Getirme Başarılı.";
+            }
+            catch (Exception)
+            {
+                _apiResponse.Error = true;
+                _apiResponse.Msg = "Category Getirme hatası Var";
+            }
+            return _apiResponse;
+        }
+        */
+
+        [HttpGet]
+        public ICollection<CategoriesDTO> GetCategoryName()
+        {
+            return _uow._categoriesRep.GetCategoriesDTO();
+        }
+
     }
 }

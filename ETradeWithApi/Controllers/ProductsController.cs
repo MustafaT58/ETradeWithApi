@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ETradeWithApi.Dal;
+using ETradeWithApi.Dto;
 using ETradeWithApi.Entity.Concretes;
 using ETradeWithApi.Http;
 using ETradeWithApi.Uow;
@@ -113,5 +114,7 @@ namespace ETradeWithApi.Controllers
         {
             return List().Where(x => x.Id == Id).FirstOrDefault();
         }
+
+        
     }
 }

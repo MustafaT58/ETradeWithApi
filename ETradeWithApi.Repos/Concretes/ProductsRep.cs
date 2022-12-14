@@ -27,6 +27,8 @@ namespace ETradeWithApi.Repos.Concretes
         {
             return Set().Select(x => new ProductsDTO { Id = x.Id, ProductName = x.ProductName }).ToList();
         }
-      
+
+        
+
     }
 }
