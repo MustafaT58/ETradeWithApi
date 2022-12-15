@@ -11,7 +11,7 @@ namespace ETradeWithApi.Repos.Abstracts
 {
     public interface ICategoriesRep : IBaseRepository<Categories>
     {
-        ICollection<CategoriesDTO> GetCategoriesDTO();
+        List<CategoriesDTO> GetCategoriesDTO();
 
     }
 }

@@ -76,15 +76,15 @@ namespace ETradeWithApi.Controllers
 
         }
 
-        [HttpDelete]
-        public ApiResponse Delete(Categories category)
+        [HttpDelete("{id:int}")]
+        public ApiResponse Delete(int id)
         {
             try
             {
-                Categories selectedCategory = _uow._categoriesRep.Find(category.Id);
+                Categories selectedCategory = _uow._categoriesRep.Find(id);
                 if (selectedCategory != null)
                 {
-                    _uow._categoriesRep.Delete(category.Id);
+                    _uow._categoriesRep.Delete(id);
                     _uow.Commit();
                     _apiResponse.Error = false;
                     _apiResponse.Msg = "silindi";
@@ -129,7 +129,7 @@ namespace ETradeWithApi.Controllers
         */
 
         [HttpGet]
-        public ICollection<CategoriesDTO> GetCategoryName()
+        public List<CategoriesDTO> GetCategoryName()
         {
             return _uow._categoriesRep.GetCategoriesDTO();
         }

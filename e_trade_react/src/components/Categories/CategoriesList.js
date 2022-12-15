@@ -1,10 +1,12 @@
-import React ,{useEffect,useContext} from 'react'
+import React ,{useEffect,useContext, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CategoryContext } from '../../context/CatContext'
-import { getCategories } from '../../functions/http/httpCat'
+import { deleteCategory, getCategories } from '../../functions/http/httpCat'
 
 
 export default function CategoriesList() {
+
+  const [deleted,setDeleted] = useState(false)  
   const navigate = useNavigate()
   const context = useContext(CategoryContext)
 
@@ -14,7 +16,7 @@ export default function CategoriesList() {
       context.setCategory(categories)
     }
     getAllCategories()
-  }, [])
+  }, [deleted])
 
 
   return (
@@ -36,21 +38,21 @@ export default function CategoriesList() {
                   <td>{b.id}</td>
                   <td>{b.description}</td>
 
-                  {/* <td>
+                  <td>
                     <button className='btn btn-success' onClick={() =>
-                      navigate("/categories/Update", {
+                      navigate("/categories/Edit", {
                         state: { id: b.id },
                       })
                     }>Kategori Güncelle </button>
-                  </td> */}
-                  {/* <td>
+                  </td>
+                  <td>
                     <button className='btn btn-danger' onClick={() => deleteCategory(b.id)
                       .then(() => {
                         alert("Ürün Silindi")
-                        navigate("/")
+                        setDeleted(true)
                       })
                     }>Ürün Sil</button>
-                  </td> */}
+                  </td>
                 </tr>
               )
             })}

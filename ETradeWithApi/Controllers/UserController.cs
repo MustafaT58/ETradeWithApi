@@ -31,5 +31,37 @@ namespace ETradeWithApi.Controllers
         {
             return _db.Set<Users>().Where(x => x.Role == "Admin").ToList();
         }
+        [HttpDelete("{id:int}")]
+        public ApiResponse Delete (int id)
+        {
+            try
+            {
+                Users selectedUser = _uow._usersRep.Find(id);
+                if (selectedUser != null)
+                {
+                    _uow._usersRep.Delete(id);
+                    _uow.Commit();
+                    _apiResponse.Error = false;
+                    _apiResponse.Msg = "kullanıcı silindi";
+                }
+                else
+                {
+                        _apiResponse.Error = true;
+                        _apiResponse.Msg = "kullanıcı bulunamadı";
+                }
+           
+            }
+            catch (Exception)
+            {
+                _apiResponse.Error = true;
+                _apiResponse.Msg = "kullanıcı silme başarısız";
+            }
+            return _apiResponse;
+        }
+        [HttpGet("{id:int}")]
+        public Users GetById(int id)
+        {
+            return UserList().Where(x=> x.Id == id).FirstOrDefault();
+        }
     }
 }

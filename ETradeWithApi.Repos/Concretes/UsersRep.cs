@@ -35,6 +35,8 @@ namespace ETradeWithApi.Repos.Concretes
             return u;
         }
 
+ 
+
         public UserDTO Login(string username, string password)
         {
             Users selectedUser = _db.Set<Users>().FirstOrDefault(x => x.Mail == username);

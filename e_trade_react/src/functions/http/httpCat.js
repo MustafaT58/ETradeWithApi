@@ -25,4 +25,14 @@ export async function addCategory(category){
     return name;
 }
 
+export function getCategory(id) {
+    return axios.get(url + `Categories/GetById/${id}`)
+}
 
+export function updateSelectedCategory(category) {
+    return axios.put(url + `Categories/Edit`, category)
+}
+
+export function deleteCategory (id){
+    return axios.delete(url + `Categories/Delete/${id}`)
+}

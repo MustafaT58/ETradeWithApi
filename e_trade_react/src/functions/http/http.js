@@ -44,5 +44,17 @@ export function deleteProduct(id) {
 
 export async function getCategoryName() {
     const response = await axios.get(url+"Categories/GetCategoryName")
-    console.log(response.data)
+    const dtoData = [];
+    try {
+        for (const key in response.data) {
+            const dtoObj = {
+                id: response.data[key].id,
+                description: response.data[key].description
+            }
+            dtoData.push(dtoObj)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+    return dtoData
 }

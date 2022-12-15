@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getCategories } from '../../functions/http/httpCat';
+import { getCategory, updateSelectedCategory } from '../../functions/http/httpCat';
 
 export default function CategoriesUpdate() {
     const navigate=useNavigate();
-    const lacation=useLocation()
+    const location=useLocation()
     const [selectedCategory,setSelectedCategory]=useState({
         description:"",
     })
     
     useEffect(()=>{
-        getCategories(location.state.id).then((res)=>{
+        getCategory(location.state.id).then((res)=>{
             setSelectedCategory(res.data)
         })
     },[])
@@ -20,9 +20,21 @@ export default function CategoriesUpdate() {
     }
 
     const updateCategory=()=>{
-        updat
+        updateSelectedCategory(selectedCategory).then((res) => {
+            alert("Ürün Güncellendi")
+            navigate("/categories/list")
+        }, err => {
+            alert(err)
+        })
     }
   return (
-    <div>CategoriesUpdate</div>
+    <div className="row">
+        <div className='col-md-5'>
+        <label>Kategori Adı</label>
+        <input className='form-control' type="text" value={selectedCategory.description} name="description" onChange={onChange}></input>
+        </div>
+        <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" onKeyDown={onChange} value="Ürün Güncelle" onChange={onChange} onClick={() => updateCategory()}/>
+        
+    </div>
   )
 }

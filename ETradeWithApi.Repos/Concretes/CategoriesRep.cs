@@ -18,7 +18,7 @@ namespace ETradeWithApi.Repos.Concretes
         {
         }
 
-        public ICollection<CategoriesDTO> GetCategoriesDTO()
+        public List<CategoriesDTO> GetCategoriesDTO()
         {
             return Set().Select(x => new CategoriesDTO { Id = x.Id, Description = x.Description }).ToList();
         }
