@@ -29,3 +29,26 @@ export function getUser(id){
 export function deleteUser(id){
     return axios.delete(url + `User/Delete/${id}`)
 }
+
+export async function addUser(users){
+    const response = await axios.post(url + "Auth/Register",users)
+    const name = response.data.description
+    return name
+}
+
+export async function getCountyName(){
+    const response = await axios.get(url + "Auth/GetCountyName")
+   const dtoData = []
+   try {
+    for(const key in response.data){
+        const dtoObj = {
+            id:response.data[key].id,
+            description:response.data[key].description
+        }
+        dtoData.push(dtoObj)
+    }
+   } catch (error) {
+    console.log(error)
+   }
+   return dtoData
+}

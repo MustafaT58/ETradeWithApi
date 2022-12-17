@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using ETradeWithApi.Entity.Concretes;
 using Newtonsoft.Json;
 using ETradeWithApi.Http;
+using ETradeWithApi.Dto;
 
 namespace ETradeWithApi.Controllers
 {
@@ -72,5 +73,11 @@ namespace ETradeWithApi.Controllers
         {
             return _uow._usersRep.List();
         }
+        [HttpGet]
+        public List<CountiesDTO> GetCountyName()
+        {
+            return _uow._countyRep.GetCountyDTO();
+        }
+
     }
 }

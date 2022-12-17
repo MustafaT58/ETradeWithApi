@@ -12,8 +12,8 @@ namespace ETradeWithApi.Entity.Abstracts
         [Key]
         public int Id { get; set; }
         public string EntityName { get; set; }
-        public string Street { get; set; }
-        public string Avenue { get; set; }
+        public string ?Street { get; set; }
+        public string ?Avenue { get; set; }
         public int No { get; set; }
         public int CountyId { get; set; }
     }

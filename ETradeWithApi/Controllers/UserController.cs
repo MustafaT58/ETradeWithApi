@@ -63,5 +63,6 @@ namespace ETradeWithApi.Controllers
         {
             return UserList().Where(x=> x.Id == id).FirstOrDefault();
         }
+
     }
 }

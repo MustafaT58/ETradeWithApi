@@ -48,7 +48,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("BasketDetails");
+                    b.ToTable("BasketDetails", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.BasketMaster", b =>
@@ -72,7 +72,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("EntityId");
 
-                    b.ToTable("BasketMasters");
+                    b.ToTable("BasketMasters", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Categories", b =>
@@ -89,7 +89,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.City", b =>
@@ -106,7 +106,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.County", b =>
@@ -128,7 +128,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Counties");
+                    b.ToTable("Counties", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Products", b =>
@@ -167,7 +167,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("VatId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Unit", b =>
@@ -184,7 +184,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Units");
+                    b.ToTable("Units", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Users", b =>
@@ -232,7 +232,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("CountyId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Vat", b =>
@@ -252,7 +252,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vats");
+                    b.ToTable("Vats", (string)null);
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.BasketDetail", b =>

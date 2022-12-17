@@ -1,5 +1,6 @@
 ﻿using ETradeWithApi.Core;
 using ETradeWithApi.Dal;
+using ETradeWithApi.Dto;
 using ETradeWithApi.Entity.Concretes;
 using ETradeWithApi.Repos.Abstracts;
 using System;
@@ -14,6 +15,12 @@ namespace ETradeWithApi.Repos.Concretes
     {
         public CountyRep(TradeContext db) : base(db)
         {
+        }
+
+        public List<CountiesDTO> GetCountyDTO()
+        {
+            return Set().Select(x => new CountiesDTO { Id = x.Id, Description = x.Description }).ToList();
+
         }
     }
 }
