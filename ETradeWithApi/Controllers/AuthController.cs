@@ -21,19 +21,19 @@ namespace ETradeWithApi.Controllers
             _uow = uow;
             _apiResponse = apiResponse;
         }
-           
+
 
         [HttpPost]
 
         public ApiResponse Register(Users user)
         {
 
-           var newUser  = _uow._usersRep.CreateUser(user);
+            var newUser = _uow._usersRep.CreateUser(user);
             if (newUser.Error == true)
             {
                 _apiResponse.Error = true;
                 _apiResponse.Msg = $"{newUser.EntityName} mevcut";
-                 
+
             }
             else
             {
@@ -44,7 +44,7 @@ namespace ETradeWithApi.Controllers
                 _apiResponse.Error = false;
                 _apiResponse.Msg = $"{newUser.EntityName} yaratıldı";
             }
-            return _apiResponse;    
+            return _apiResponse;
 
         }
 
@@ -58,7 +58,7 @@ namespace ETradeWithApi.Controllers
                 //HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
                 _apiResponse.Error = false;
                 _apiResponse.Msg = $"{Mail} ile giriş yapıldı";
-                
+
             }
             else
             {
@@ -73,11 +73,16 @@ namespace ETradeWithApi.Controllers
         {
             return _uow._usersRep.List();
         }
-        [HttpGet]
-        public List<CountiesDTO> GetCountyName()
-        {
-            return _uow._countyRep.GetCountyDTO();
-        }
 
+        [HttpGet("{id:int}")]
+        public List<CountiesDTO> GetCountyName(int id)
+        {
+            return _uow._countyRep.GetCountyDTO(id);
+        }
+        [HttpGet]
+        public List<CitiesDTO> GetCityName()
+        {
+            return _uow._cityRep.GetCitiesDTO();
+        }
     }
 }

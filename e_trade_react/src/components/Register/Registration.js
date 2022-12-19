@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { addUser, getCountyName } from '../../functions/http/httpUser'
+import { addUser, getCityName, getCountyName } from '../../functions/http/httpUser'
 
 export default function Registration() {
     const navigate = useNavigate()
     const [countyList, setCountyList] = useState([])
+    const [cityList, setCityList] = useState([])
+    const [selectedCityId, setSelectedCityId] = useState(0)
 
     useEffect(() => {
-        async function getAllNames() {
+        async function getAllCityNames() {
             try {
-                const countyNames = await getCountyName()
-                setCountyList(countyNames)
+                // const id = document.getElementById("cityId").target.value
+                // const countyNames = await getCountyName(selectedCityId)
+                const cityNames = await getCityName()
+                // setCountyList(countyNames)
+                setCityList(cityNames)
+
             } catch (error) {
                 console.log(error)
             }
         }
-        getAllNames()
+        getAllCityNames()
     }, [])
+
+    useEffect(() => {
+        async function getAllCountyNames() {
+            // alert(selectedCityId)
+            try {
+                const countyNames = await getCountyName(selectedCityId)
+                setCountyList(countyNames)
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getAllCountyNames()
+    }, [selectedCityId])
+
     console.log(countyList)
 
     const [newUser, setNewUser] = useState({
@@ -26,7 +47,8 @@ export default function Registration() {
         street: "",
         avenue: "",
         no: "",
-        countyId: ""
+        countyId: "",
+        // cityId: ""
     })
 
     const createUser = () => {
@@ -42,6 +64,17 @@ export default function Registration() {
     const onChange = (event) => {
         newUser.countyId = event.target.value
         setNewUser({ ...newUser, [event.target.name]: event.target.value })
+    }
+
+    const onChange2 = (event) => {
+       var x = event.target.value
+       var y = event.target.text
+       if(y == "Seçiniz"){
+        setSelectedCityId(0)
+       } else {
+       setSelectedCityId(x)
+       }
+        // alert(selectedCityId)
     }
 
     return (
@@ -107,10 +140,22 @@ export default function Registration() {
                                                     <input onChange={onChange} value={newUser.no} type="text" name='no' className="form-control" />
                                                     <label className="form-label" htmlFor="form3Example4c">No</label>
                                                 </div>
-                                            </div> <div className="d-flex flex-row align-items-center mb-4">
+                                            </div>
+                                            <div className="d-flex flex-row align-items-center mb-4">
+                                                <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <select name="cityId" id="cityId" onChange={onChange2}>
+                                                    <option>Seçiniz</option>
+                                                    {cityList.map((c) => {
+                                                        return (
+                                                            <option value={c.id} >{c.description}</option>
+                                                        )
+                                                    })}
+                                                </select> <br />
+                                            </div>
+                                            <div className="d-flex flex-row align-items-center mb-4" >
                                                 <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                 <select name="countyId" id="countyId" onChange={onChange}>
-                                                    <option>Seçiniz</option>
+                                                    <option style={{ width: "200px" }}>Seçiniz</option>
                                                     {countyList.map((c) => {
                                                         return (
                                                             <option value={c.id} >{c.description}</option>
@@ -127,9 +172,22 @@ export default function Registration() {
                                                 </label>
                                             </div> */}
 
-                                            <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                <button onClick={() => createUser()} type="button" className="btn btn-primary btn-lg">Kaydol</button>
+                                            <div className='d-flex justify-content-center' >
+                                                {/* <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4"> */}
+                                                <button onClick={() => createUser()} type="button" className="btn btn-primary btn-md">Kaydol</button>
+                                                {/* </div> */}
+                                                {/* <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4"> */}
+                                                <button
+                                                    onClick={() => navigate("/login")}
+                                                    type="button"
+                                                    className="btn btn-primary btn-md"
+                                                    style={{ marginLeft: "10px" }}
+                                                >
+                                                    Giriş Yap
+                                                </button>
+                                                {/* </div> */}
                                             </div>
+
 
                                         </form>
 
@@ -145,7 +203,7 @@ export default function Registration() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }

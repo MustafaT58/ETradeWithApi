@@ -17,9 +17,9 @@ namespace ETradeWithApi.Repos.Concretes
         {
         }
 
-        public List<CountiesDTO> GetCountyDTO()
+        public List<CountiesDTO> GetCountyDTO(int id)
         {
-            return Set().Select(x => new CountiesDTO { Id = x.Id, Description = x.Description }).ToList();
+            return Set().Where(x => x.CityId == id).Select(x => new CountiesDTO { Id = x.Id, Description = x.Description }).ToList();
 
         }
     }

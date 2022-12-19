@@ -36,8 +36,25 @@ export async function addUser(users){
     return name
 }
 
-export async function getCountyName(){
-    const response = await axios.get(url + "Auth/GetCountyName")
+export async function getCountyName(id){
+    const response = await axios.get(url + "Auth/GetCountyName/" + id)
+   const dtoData = []
+   try {
+    for(const key in response.data){
+        const dtoObj = {
+            id:response.data[key].id,
+            description:response.data[key].description
+        }
+        dtoData.push(dtoObj)
+    }
+   } catch (error) {
+    console.log(error)
+   }
+   return dtoData
+}
+
+export async function getCityName(){
+    const response = await axios.get(url + "Auth/GetCityName")
    const dtoData = []
    try {
     for(const key in response.data){

@@ -11,6 +11,6 @@ namespace ETradeWithApi.Repos.Abstracts
 {
     public interface ICountyRep : IBaseRepository<County>
     {
-        List<CountiesDTO> GetCountyDTO();
+        List<CountiesDTO> GetCountyDTO(int Id);
     }
 }

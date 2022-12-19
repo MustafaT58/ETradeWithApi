@@ -1,5 +1,6 @@
 ﻿using ETradeWithApi.Core;
 using ETradeWithApi.Dal;
+using ETradeWithApi.Dto;
 using ETradeWithApi.Entity.Concretes;
 using ETradeWithApi.Repos.Abstracts;
 using System;
@@ -14,6 +15,11 @@ namespace ETradeWithApi.Repos.Concretes
     {
         public CityRep(TradeContext db) : base(db)
         {
+        }
+
+        public List<CitiesDTO> GetCitiesDTO()
+        {
+            return Set().Select(x => new CitiesDTO { Id = x.Id, Description= x.Description }).ToList();
         }
     }
 }
