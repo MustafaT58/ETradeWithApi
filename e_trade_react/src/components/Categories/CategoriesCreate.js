@@ -22,7 +22,7 @@ export default function CategoriesCreate() {
         setNewCategory({...newCategory,[event.target.name]:event.target.value})
         
     }
-
+    
 
   return (
     <div className="row">

@@ -1,7 +1,9 @@
 import React ,{useEffect,useContext, useState} from 'react'
+import { Button, Modal, ModalFooter } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { CategoryContext } from '../../context/CatContext'
 import { deleteCategory, getCategories } from '../../functions/http/httpCat'
+import CategoriesCreate from './CategoriesCreate'
 
 
 export default function CategoriesList() {
@@ -9,6 +11,10 @@ export default function CategoriesList() {
   const [deleted,setDeleted] = useState(false)  
   const navigate = useNavigate()
   const context = useContext(CategoryContext)
+  const [show , setShow] = useState(false)
+
+  const handleClose = () => setShow (false)
+  const handleShow = () => setShow (true)
 
   useEffect(() => {
     async function getAllCategories() {
@@ -19,11 +25,13 @@ export default function CategoriesList() {
   }, [deleted])
 
 
+
   return (
+    <>
     <div className='row'>
       <div className='col-md-7'>
         <button className='btn btn-primary'
-          onClick={() => navigate("/categories/create")}> Yeni Kategori</button>
+        onClick={handleShow}  > Yeni Kategori</button>
         <table className='table'>
           <thead>
             <tr>
@@ -60,5 +68,21 @@ export default function CategoriesList() {
         </table>
       </div>
     </div>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header className='modal-header' closeButton>
+        <Modal.Title>
+          Add Category 
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <CategoriesCreate/>
+      </Modal.Body>
+      <ModalFooter>
+        <Button onClick={handleClose} variant='secondary'>
+            Close
+        </Button>
+      </ModalFooter>
+    </Modal>
+    </>
   )
 }
