@@ -14,7 +14,8 @@ export default function CategoriesCreate() {
             if (res){
                 alert ("Yeni Kategori Eklendi!")
             }
-            navigate("/categories/list")
+            // navigate("/categories/list")
+            window.location.reload()
         })
     }
 
@@ -30,7 +31,7 @@ export default function CategoriesCreate() {
         <label>Kategori Adı</label>
         <input className='form-control' type="text" value={newCategory.description} name="description" onChange={onChange}></input>
         </div>
-        <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" onKeyDown={onChange} value="Ürün Ekle" onChange={onChange} onClick={() => createCategory()}/>
+        <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" value="Ürün Ekle" onChange={onChange} onClick={() => createCategory()}/>
         
     </div>
   )

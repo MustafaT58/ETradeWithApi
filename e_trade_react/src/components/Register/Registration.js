@@ -144,7 +144,7 @@ export default function Registration() {
                                             <div className="d-flex flex-row align-items-center mb-4">
                                                 <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                 <select name="cityId" id="cityId" onChange={onChange2}>
-                                                    <option>Seçiniz</option>
+                                                    <option disabled selected="selected">Seçiniz</option>
                                                     {cityList.map((c) => {
                                                         return (
                                                             <option value={c.id} >{c.description}</option>
@@ -155,7 +155,7 @@ export default function Registration() {
                                             <div className="d-flex flex-row align-items-center mb-4" >
                                                 <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                 <select name="countyId" id="countyId" onChange={onChange}>
-                                                    <option style={{ width: "200px" }}>Seçiniz</option>
+                                                    <option disabled selected="selected" >Seçiniz</option>
                                                     {countyList.map((c) => {
                                                         return (
                                                             <option value={c.id} >{c.description}</option>
