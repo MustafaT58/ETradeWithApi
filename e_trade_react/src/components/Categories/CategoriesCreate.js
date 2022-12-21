@@ -30,9 +30,9 @@ export default function CategoriesCreate() {
         <div className='col-md-5'>
         <label>Kategori Adı</label>
         <input className='form-control' type="text" value={newCategory.description} name="description" onChange={onChange}></input>
-        </div>
-        <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" value="Ürün Ekle" onChange={onChange} onClick={() => createCategory()}/>
         
+        <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" value="Kategori Ekle" onChange={onChange} onClick={() => createCategory()}/>
+        </div>
     </div>
   )
 }

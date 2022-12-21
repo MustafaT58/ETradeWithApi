@@ -27,14 +27,15 @@ export default function CategoriesUpdate() {
             alert(err)
         })
     }
+
   return (
     <div className="row">
         <div className='col-md-5'>
         <label>Kategori Adı</label>
         <input className='form-control' type="text" value={selectedCategory.description} name="description" onChange={onChange}></input>
-        </div>
-        <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" onKeyDown={onChange} value="Ürün Güncelle" onChange={onChange} onClick={() => updateCategory()}/>
         
+        <input className="btn btn-success"  style={{marginTop: "10px"}} type="submit" value="Kategori Güncelle" onChange={onChange} onClick={() => updateCategory()}/>
+        </div>
     </div>
   )
 }
