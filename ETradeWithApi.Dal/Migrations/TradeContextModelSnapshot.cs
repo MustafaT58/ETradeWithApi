@@ -48,7 +48,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("BasketDetails", (string)null);
+                    b.ToTable("BasketDetails");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.BasketMaster", b =>
@@ -72,7 +72,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("EntityId");
 
-                    b.ToTable("BasketMasters", (string)null);
+                    b.ToTable("BasketMasters");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Categories", b =>
@@ -84,12 +84,11 @@ namespace ETradeWithApi.Dal.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.City", b =>
@@ -101,12 +100,11 @@ namespace ETradeWithApi.Dal.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.County", b =>
@@ -121,14 +119,13 @@ namespace ETradeWithApi.Dal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Counties", (string)null);
+                    b.ToTable("Counties");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Products", b =>
@@ -143,6 +140,9 @@ namespace ETradeWithApi.Dal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -167,7 +167,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasIndex("VatId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Unit", b =>
@@ -179,12 +179,11 @@ namespace ETradeWithApi.Dal.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Units", (string)null);
+                    b.ToTable("Units");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Users", b =>
@@ -196,7 +195,6 @@ namespace ETradeWithApi.Dal.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Avenue")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CountyId")
@@ -206,7 +204,7 @@ namespace ETradeWithApi.Dal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Error")
+                    b.Property<bool?>("Error")
                         .HasColumnType("bit");
 
                     b.Property<string>("Mail")
@@ -221,18 +219,16 @@ namespace ETradeWithApi.Dal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CountyId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.Vat", b =>
@@ -244,7 +240,6 @@ namespace ETradeWithApi.Dal.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Ratio")
@@ -252,7 +247,7 @@ namespace ETradeWithApi.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vats", (string)null);
+                    b.ToTable("Vats");
                 });
 
             modelBuilder.Entity("ETradeWithApi.Entity.Concretes.BasketDetail", b =>

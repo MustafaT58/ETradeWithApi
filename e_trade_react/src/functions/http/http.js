@@ -14,6 +14,7 @@ export async function getProducts() {
                 description: response.data[key].description,
                 productname: response.data[key].productName,
                 unitprice: response.data[key].unitPrice,
+                productImage: response.data[key].productImage
             }
             productData.push(productObj)
             

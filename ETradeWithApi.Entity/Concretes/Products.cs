@@ -13,6 +13,7 @@ namespace ETradeWithApi.Entity.Concretes
         public decimal UnitPrice { get; set; }
         public int CategoryId { get; set; }
         public int VatId { get; set; }
+        public string ?ProductImage { get; set; }
 
         public int UnitId { get; set; }
         [ForeignKey("CategoryId")]

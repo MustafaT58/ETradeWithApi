@@ -27,7 +27,7 @@ export default function ProductCreate() {
     categoryid: "",
     vatid: "",
     unitid: "",
-
+    productimage: "",
   })
   const createProduct = () => {
     addProduct(newProduct)
@@ -35,7 +35,7 @@ export default function ProductCreate() {
         if (res) {
           alert("Yeni ürün eklendi!")
         }
-        navigate("/products/list")
+        window.location.reload()
       })
   }
   const onChange = (event) => {
@@ -51,6 +51,9 @@ export default function ProductCreate() {
   return (
     <div className="row">
       <div className="col-md-5">
+       <label>Ürün Resim</label>
+        <input className="form-control" type="text" value={newProduct.productimage} name="productimage" onChange={onChange}
+        />
         <label>Ürün Adı</label>
         <input className="form-control" type="text" value={newProduct.productname} name="productname" onChange={onChange}
         />
@@ -67,7 +70,7 @@ export default function ProductCreate() {
           <option>Seçiniz</option>
           {clist.map((c) => {
             return (
-              <option value={c.id} >{c.description}</option>
+              <option key={c.id} value={c.id} >{c.description}</option>
             )
           })}
         </select> <br />

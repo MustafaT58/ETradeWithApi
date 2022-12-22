@@ -9,6 +9,7 @@ export default function ProductList() {
     const [deleted, setDeleted] = useState(false)
     const navigate = useNavigate()
     const context = useContext(ProductContext)
+    const [quantity, setQuantity] = useState(0);
 
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
@@ -22,6 +23,16 @@ export default function ProductList() {
         getAllProducts()
     }, [deleted])
 
+    const increaseQua = () => {
+        setQuantity(quantity + 1)
+    }
+
+    const decraseQua = () => {
+        setQuantity(quantity - 1)
+    }
+
+    console.log(quantity)
+
     return (
         <div className='row'>
             <div className='col-md-7'>
@@ -32,12 +43,13 @@ export default function ProductList() {
                 <table className='table'>
                     <thead>
                         <tr>
+                            <th>Resim</th>
                             <th>Ürün Adı</th>
                             <th>Açıklama</th>
                             <th>Fiyat</th>
                             {/* <th>Kategori</th>
-                    <th>Birim</th>
-                    <th>Kdv</th> */}
+                                <th>Birim</th>
+                                <th>Kdv</th> */}
 
                         </tr>
                     </thead>
@@ -45,12 +57,13 @@ export default function ProductList() {
                         {context.products.map(b => {
                             return (
                                 <tr key={b.id}>
+                                    <td><img width={"50px"} src={b.productImage} /></td>
                                     <td>{b.productname}</td>
                                     <td>{b.description}</td>
                                     <td>{b.unitprice}</td>
                                     {/* <td>{b.categoryid}</td>
-                            <td>{b.unitid}</td>
-                            <td>{b.vatid}</td> */}
+                                        <td>{b.unitid}</td>
+                                        <td>{b.vatid}</td> */}
 
                                     <td>
                                         <button
@@ -70,6 +83,36 @@ export default function ProductList() {
                                                     // window.location.reload()
                                                 })}
                                         > Ürün Sil </button>
+                                    </td>
+                                    <td>
+                                            {quantity === 0 ? (
+                                                <Button className="w-100" onClick={increaseQua}>
+                                                    + Add To Cart
+                                                </Button>
+                                            ) : (
+                                                <div
+                                                    className="d-flex align-items-center flex-column"
+                                                    style={{ gap: ".5rem" }}
+                                                >
+                                                    <div
+                                                        className="d-flex align-items-center justify-content-center"
+                                                        style={{ gap: ".5rem" }}
+                                                    >
+                                                        <Button onClick={decraseQua}>-</Button>
+                                                        <div>
+                                                            <span className="fs-3">{quantity}</span> in cart
+                                                        </div>
+                                                        <Button onClick={increaseQua}>+</Button>
+                                                    </div>
+                                                    <Button
+                                                        // onClick={() => removeFromCart(id)}
+                                                        variant="danger"
+                                                        size="sm"
+                                                    >
+                                                        Remove
+                                                    </Button>
+                                                </div>
+                                            )}
                                     </td>
                                 </tr>
                             )
