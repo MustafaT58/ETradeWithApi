@@ -16,7 +16,7 @@ function App() {
 
         <MDBCol col='4' md='6'>
 
-          <div className="d-flex flex-row align-items-center justify-content-center">
+          {/* <div className="d-flex flex-row align-items-center justify-content-center">
 
             <p className="lead fw-normal mb-0 me-3">Sign in with</p>
 
@@ -32,23 +32,23 @@ function App() {
               <MDBIcon fab icon='linkedin-in' />
             </MDBBtn>
 
-          </div>
-
+          </div> */}
+{/* 
           <div className="divider d-flex align-items-center my-4">
             <p className="text-center fw-bold mx-3 mb-0">Or</p>
-          </div>
+          </div> */}
 
           <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
           <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
 
           <div className="d-flex justify-content-between mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="!#">Forgot password?</a>
+            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Beni Hatırla.' />
+            <a href="!#">Şifreni mi unuttun?</a>
           </div>
 
           <div className='text-center text-md-start mt-4 pt-2'>
-            <MDBBtn className="mb-0 px-5" size='lg'>Login</MDBBtn>
-            <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a type='button' onClick={()=> navigate("/registration")} className="link-danger">Register</a></p>
+            <button className="btn btn-primary" size='md'>Giriş</button>
+            <p className="small fw-bold mt-2 pt-1 mb-2">Hesabınız yok mu? <a type='button' onClick={()=> navigate("/registration")} className="link-danger">Kaydol</a></p>
           </div>
 
         </MDBCol>

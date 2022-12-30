@@ -12,6 +12,7 @@ export default function CategoriesList() {
   const [deleted, setDeleted] = useState(false)
   const navigate = useNavigate()
   const context = useContext(CategoryContext)
+  
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -51,13 +52,17 @@ export default function CategoriesList() {
                     <td>{b.description}</td>
 
                     <td>
-                      <button className='btn btn-success' onClick={handleShow2} >Kategori Güncelle </button>
+                      <button className='btn btn-success' onClick={()=>
+                        navigate(handleShow2(),{
+                          state:{id:b.id},
+                        })
+                      } >Kategori Güncelle </button>
                     </td>
                     <td>
                       <button className='btn btn-danger' onClick={() => deleteCategory(b.id)
                         .then(() => {
                           alert("Ürün Silindi")
-                          setDeleted(true)
+                          setDeleted(!deleted)
                         })
                       }>Ürün Sil</button>
                     </td>
@@ -79,11 +84,10 @@ export default function CategoriesList() {
         </Modal.Body>
         <ModalFooter>
           <Button onClick={handleClose} variant='secondary'>
-            Close
+            Kapat
           </Button>
         </ModalFooter>
       </Modal>
-
 
       <Modal show={show2} onHide={handleClose2}>
         <Modal.Header className='modal-header' closeButton>

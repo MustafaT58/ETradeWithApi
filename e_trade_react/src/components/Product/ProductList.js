@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Modal, ModalFooter } from 'react-bootstrap'
 import { ProductContext } from '../../context/ProContext'
 import ProductCreate from './ProductCreate'
+import ProductUpdate from './ProductUpdate'
 
 export default function ProductList() {
     const [deleted, setDeleted] = useState(false)
@@ -14,7 +15,11 @@ export default function ProductList() {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
-    // const date = Date();
+
+    const [show2, setShow2] = useState(false)
+    const handleClose2 = () => setShow2(false)
+    const handleShow2 = () => setShow2(true)
+
     useEffect(() => {
         async function getAllProducts() {
             const products = await getProducts()
@@ -69,7 +74,7 @@ export default function ProductList() {
                                         <button
                                             className='btn btn-success'
                                             onClick={() =>
-                                                navigate("/products/update", {
+                                                navigate(handleShow2(), {
                                                     state: { id: b.id },
                                                 })}> Ürün Güncelle </button>
                                     </td>
@@ -79,40 +84,40 @@ export default function ProductList() {
                                             onClick={() => deleteProduct(b.id)
                                                 .then(() => {
                                                     alert("Ürün silindi.")
-                                                    setDeleted(true)
+                                                    setDeleted(!deleted)
                                                     // window.location.reload()
                                                 })}
                                         > Ürün Sil </button>
                                     </td>
                                     <td>
-                                            {quantity === 0 ? (
-                                                <Button className="w-100" onClick={increaseQua}>
-                                                    + Add To Cart
-                                                </Button>
-                                            ) : (
+                                        {quantity === 0 ? (
+                                            <Button className="w-100" onClick={increaseQua}>
+                                                + Add To Cart
+                                            </Button>
+                                        ) : (
+                                            <div
+                                                className="d-flex align-items-center flex-column"
+                                                style={{ gap: ".5rem" }}
+                                            >
                                                 <div
-                                                    className="d-flex align-items-center flex-column"
+                                                    className="d-flex align-items-center justify-content-center"
                                                     style={{ gap: ".5rem" }}
                                                 >
-                                                    <div
-                                                        className="d-flex align-items-center justify-content-center"
-                                                        style={{ gap: ".5rem" }}
-                                                    >
-                                                        <Button onClick={decraseQua}>-</Button>
-                                                        <div>
-                                                            <span className="fs-3">{quantity}</span> in cart
-                                                        </div>
-                                                        <Button onClick={increaseQua}>+</Button>
+                                                    <Button onClick={decraseQua}>-</Button>
+                                                    <div>
+                                                        <span className="fs-3">{quantity}</span> in cart
                                                     </div>
-                                                    <Button
-                                                        // onClick={() => removeFromCart(id)}
-                                                        variant="danger"
-                                                        size="sm"
-                                                    >
-                                                        Remove
-                                                    </Button>
+                                                    <Button onClick={increaseQua}>+</Button>
                                                 </div>
-                                            )}
+                                                <Button
+                                                    // onClick={() => removeFromCart(id)}
+                                                    variant="danger"
+                                                    size="sm"
+                                                >
+                                                    Remove
+                                                </Button>
+                                            </div>
+                                        )}
                                     </td>
                                 </tr>
                             )
@@ -125,7 +130,7 @@ export default function ProductList() {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header className='modal-header' closeButton>
                     <Modal.Title>
-                        Add Category
+                        Ürün Ekle
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -133,10 +138,28 @@ export default function ProductList() {
                 </Modal.Body>
                 <ModalFooter>
                     <Button onClick={handleClose} variant='secondary'>
-                        Close
+                        Kapat
                     </Button>
                 </ModalFooter>
             </Modal>
+
+            <Modal show={show2} onHide={handleClose2}>
+                <Modal.Header className='modal-header' closeButton>
+                    <Modal.Title>
+                        Ürün Güncelle
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ProductUpdate />
+                </Modal.Body>
+                <ModalFooter>
+                    <Button onClick={handleClose2} variant='secondary'>
+                        Kapat
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
+    
         </div>
 
     )

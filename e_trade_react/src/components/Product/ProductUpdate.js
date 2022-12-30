@@ -1,3 +1,8 @@
+
+
+
+
+
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -27,6 +32,7 @@ export default function ProductUpdate() {
         updateSelectedProduct(selectedProduct).then((res)=>{
             alert("Ürün Güncellendi")
             navigate("/products/list")
+            window.location.reload()
         },err=>{
             alert(err)
         })
